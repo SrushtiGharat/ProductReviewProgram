@@ -91,11 +91,11 @@ namespace ProductReviewProgram
         /// <param name="listProductReview"></param>
         public void InsertValuesInDataTable(List<ProductReview> listProductReview)
         {
-            dataTable.Columns.Add("ProductID");
-            dataTable.Columns.Add("UserID");
-            dataTable.Columns.Add("Rating");
+            dataTable.Columns.Add("ProductID",typeof(int));
+            dataTable.Columns.Add("UserID",typeof(int));
+            dataTable.Columns.Add("Rating", typeof(double));
             dataTable.Columns.Add("Review");
-            dataTable.Columns.Add("isLike");
+            dataTable.Columns.Add("isLike", typeof(bool));
 
             foreach(ProductReview product in listProductReview)
             {
