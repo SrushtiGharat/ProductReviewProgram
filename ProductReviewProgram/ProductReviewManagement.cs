@@ -119,6 +119,9 @@ namespace ProductReviewProgram
             }
         }
 
+        /// <summary>
+        /// Get average rating for each product
+        /// </summary>
         public void GetAverageRating()
         {
             var recordedData = dataTable.AsEnumerable().GroupBy(e => e.Field<int>("ProductID")).Select 
@@ -127,6 +130,23 @@ namespace ProductReviewProgram
             foreach (var list in recordedData)
             {
                 Console.WriteLine(list.ProductID + "-->" + list.Average);
+            }
+        }
+
+        /// <summary>
+        /// Get products whose review contains nice
+        /// </summary>
+        public void GetProductWithReviewNice()
+        {
+            var recordedData = from productReview in dataTable.AsEnumerable()
+                               where productReview.Field<string>("Review").ToUpper().Contains("NICE")
+                               select productReview;
+
+            foreach (var product in recordedData)
+            {
+                Console.WriteLine("ProductID : " + product.Field<int>("ProductID") + " " + "UserID : " + product.Field<int>("UserID")
+                    + " " + "Rating : " + product.Field<double>("Rating") + " " + "Review : " + product.Field<string>("Review") + " "
+                    + "isLike : " + product.Field<bool>("isLike"));
             }
         }
     }
