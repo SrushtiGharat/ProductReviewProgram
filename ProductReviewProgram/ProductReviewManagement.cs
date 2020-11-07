@@ -102,5 +102,21 @@ namespace ProductReviewProgram
                 dataTable.Rows.Add(product.ProductID, product.UserID, product.Rating, product.Review, product.isLike);
             }          
         }
+
+        /// <summary>
+        /// Get records with isLike true from data table
+        /// </summary>
+        public void GetRecordsWithIsLikeTrue()
+        {
+            var recordedData = from productReview in dataTable.AsEnumerable() where productReview.Field<bool>("isLike") == true
+                               select productReview;
+
+            foreach (var product in recordedData)
+            {
+                Console.WriteLine("ProductID : " + product.Field<int>("ProductID") + " " + "UserID : " + product.Field<int>("UserID")
+                    + " " + "Rating : " + product.Field<double>("Rating") + " " + "Review : " + product.Field<string>("Review") + " " 
+                    + "isLike : " + product.Field<bool>("isLike"));
+            }
+        }
     }
 }
