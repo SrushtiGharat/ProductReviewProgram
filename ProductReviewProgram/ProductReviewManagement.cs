@@ -11,7 +11,7 @@ namespace ProductReviewProgram
         /// Get top 3 best rated products
         /// </summary>
         /// <param name="listProductReview"></param>
-        public void TopBestRatedRecords(List<ProductReview> listProductReview)
+        public void GetTopBestRatedRecords(List<ProductReview> listProductReview)
         {
             var recordedData = (from productReviews in listProductReview
                                 orderby productReviews.Rating descending
@@ -51,6 +51,20 @@ namespace ProductReviewProgram
             foreach (var list in recordedData)
             {
                 Console.WriteLine(list.ProductID + "-->" + list.Count);
+            }
+        }
+
+        /// <summary>
+        /// Get only product id and reviews from the list
+        /// </summary>
+        /// <param name="listProductReview"></param>
+        public void GetProductIdAndReview(List<ProductReview> listProductReview)
+        {
+            var recordedData = from productReview in listProductReview select new { productReview.ProductID, productReview.Review };
+
+            foreach (var list in recordedData)
+            {
+                Console.WriteLine(list.ProductID + "-->" + list.Review);
             }
         }
     }
