@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -7,6 +8,7 @@ namespace ProductReviewProgram
 {
     class ProductReviewManagement
     {
+        public readonly DataTable dataTable = new DataTable();
         /// <summary>
         /// Get top 3 best rated products
         /// </summary>
@@ -68,6 +70,10 @@ namespace ProductReviewProgram
             }
         }
 
+        /// <summary>
+        /// Skip Top 5 Records
+        /// </summary>
+        /// <param name="listProductReview"></param>
         public void SkipTop5Records(List<ProductReview> listProductReview)
         {
             var recordedData = (from productReview in listProductReview select productReview).Skip(5);
@@ -77,6 +83,24 @@ namespace ProductReviewProgram
                 Console.WriteLine("ProductID : " + list.ProductID + " " + "UserID : " + list.UserID
                     + " " + "Rating : " + list.Rating + " " + "Review : " + list.Review + " " + "isLike : " + list.isLike);
             }
+        }
+
+        /// <summary>
+        /// Insert values in data table from list
+        /// </summary>
+        /// <param name="listProductReview"></param>
+        public void InsertValuesInDataTable(List<ProductReview> listProductReview)
+        {
+            dataTable.Columns.Add("ProductID");
+            dataTable.Columns.Add("UserID");
+            dataTable.Columns.Add("Rating");
+            dataTable.Columns.Add("Review");
+            dataTable.Columns.Add("isLike");
+
+            foreach(ProductReview product in listProductReview)
+            {
+                dataTable.Rows.Add(product.ProductID, product.UserID, product.Rating, product.Review, product.isLike);
+            }          
         }
     }
 }

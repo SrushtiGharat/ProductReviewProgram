@@ -26,7 +26,7 @@ namespace ProductReviewProgram
             };
             Console.WriteLine("------------------------------------");
             Console.WriteLine("1.Display all records\n2.Get Top 3 Best-Rated products\n3.Get products with id 1,4,9 and ratings > 3" +
-                "\n4.Get Count Of Reviews\n5.Get ProductId and Review\n6.Skip Top 5 Records");
+                "\n4.Get Count Of Reviews\n5.Get ProductId and Review\n6.Skip Top 5 Records\n7.Insert values in Data Table");
             Console.WriteLine("------------------------------------");
            
             int choice = Convert.ToInt32(Console.ReadLine());
@@ -52,6 +52,10 @@ namespace ProductReviewProgram
                     break;
                 case 6:
                     management.SkipTop5Records(productReviewList);
+                    break;
+                case 7:
+                    management.InsertValuesInDataTable(productReviewList);
+                    Console.WriteLine("Values inserted successfully");
                     break;
                 default:
                     Console.WriteLine("Invalid choice");
