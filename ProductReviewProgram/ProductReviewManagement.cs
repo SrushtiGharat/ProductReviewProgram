@@ -40,5 +40,18 @@ namespace ProductReviewProgram
                     + " " + "Rating : " + list.Rating + " " + "Review : " + list.Review + " " + "isLike : " + list.isLike);
             }
         }
+
+        /// <summary>
+        /// Get review counts for each product id
+        /// </summary>
+        /// <param name="listProductReview"></param>
+        public void GetCountOfReviews(List<ProductReview> listProductReview)
+        {
+            var recordedData = listProductReview.GroupBy(x => x.ProductID).Select(x => new { ProductID = x.Key, Count = x.Count() });
+            foreach (var list in recordedData)
+            {
+                Console.WriteLine(list.ProductID + "-->" + list.Count);
+            }
+        }
     }
 }
