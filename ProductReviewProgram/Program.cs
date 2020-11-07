@@ -7,6 +7,8 @@ namespace ProductReviewProgram
     {
         static void Main(string[] args)
         {
+            ProductReviewManagement management = new ProductReviewManagement();
+
             Console.WriteLine("Welcome To Product Review Program");
             List<ProductReview> productReviewList = new List<ProductReview>()
             {
@@ -22,11 +24,27 @@ namespace ProductReviewProgram
                 new ProductReview(){ProductID=10,UserID=1,Rating=8,Review="Nice",isLike=true},
                 new ProductReview(){ProductID=11,UserID=1,Rating=3,Review="Nice",isLike=true}
             };
-
-            foreach (var list in productReviewList)
+            Console.WriteLine("------------------------------------");
+            Console.WriteLine("1.Display all records\n2.Get Top 3 Best-Rated products");
+            Console.WriteLine("------------------------------------");
+           
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
             {
-                Console.WriteLine("ProductID : " + list.ProductID + " " + "UserID : " + list.UserID                                    + " " + "Rating : " + list.Rating + " " + "Review : " + list.Review + " " + "isLike : " + list.isLike);
+                case 1:
+                    foreach (var list in productReviewList)
+                    {
+                        Console.WriteLine("ProductID : " + list.ProductID + " " + "UserID : " + list.UserID + " " + "Rating : " + list.Rating + " " + "Review : " + list.Review + " " + "isLike : " + list.isLike);
+                    }
+                    break;
+                case 2:
+                    management.TopBestRatedRecords(productReviewList);
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice");
+                    break;
             }
+            
         }
     }
 }
