@@ -91,16 +91,32 @@ namespace ProductReviewProgram
         /// <param name="listProductReview"></param>
         public void InsertValuesInDataTable(List<ProductReview> listProductReview)
         {
-            dataTable.Columns.Add("ProductID");
-            dataTable.Columns.Add("UserID");
-            dataTable.Columns.Add("Rating");
+            dataTable.Columns.Add("ProductID",typeof(int));
+            dataTable.Columns.Add("UserID", typeof(int));
+            dataTable.Columns.Add("Rating", typeof(double));
             dataTable.Columns.Add("Review");
-            dataTable.Columns.Add("isLike");
+            dataTable.Columns.Add("isLike", typeof(bool));
 
             foreach(ProductReview product in listProductReview)
             {
                 dataTable.Rows.Add(product.ProductID, product.UserID, product.Rating, product.Review, product.isLike);
             }          
+        }
+
+        /// <summary>
+        /// Get records with isLike true from data table
+        /// </summary>
+        public void GetRecordsWithIsLikeTrue()
+        {
+            var recordedData = from productReview in dataTable.AsEnumerable() where productReview.Field<bool>("isLike") == true
+                               select productReview;
+
+            foreach (var product in recordedData)
+            {
+                Console.WriteLine("ProductID : " + product.Field<int>("ProductID") + " " + "UserID : " + product.Field<int>("UserID")
+                    + " " + "Rating : " + product.Field<double>("Rating") + " " + "Review : " + product.Field<string>("Review") + " " 
+                    + "isLike : " + product.Field<bool>("isLike"));
+            }
         }
     }
 }
