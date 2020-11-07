@@ -27,7 +27,7 @@ namespace ProductReviewProgram
             Console.WriteLine("------------------------------------");
             Console.WriteLine("1.Display all records\n2.Get Top 3 Best-Rated products\n3.Get products with id 1,4,9 and ratings > 3" +
                 "\n4.Get Count Of Reviews\n5.Get ProductId and Review\n6.Skip Top 5 Records\n7.Insert values in Data Table\n8.Get Records with" +
-                "isLike True\n9.Get average rating for each product\n10.Get products with review as nice");
+                "isLike True\n9.Get average rating for each product\n10.Get products with review as nice\n11.Get records where UserId is 10 OrderBy Rating");
             Console.WriteLine("------------------------------------");
            
             int choice = Convert.ToInt32(Console.ReadLine());
@@ -69,6 +69,10 @@ namespace ProductReviewProgram
                 case 10:
                     management.InsertValuesInDataTable(productReviewList);
                     management.GetProductWithReviewNice();
+                    break;
+                case 11:
+                    management.InsertValuesInDataTable(productReviewList);
+                    management.GetRecordsWithUserId10();
                     break;
                 default:
                     Console.WriteLine("Invalid choice");

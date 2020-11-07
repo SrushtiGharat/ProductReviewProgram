@@ -149,5 +149,29 @@ namespace ProductReviewProgram
                     + "isLike : " + product.Field<bool>("isLike"));
             }
         }
+
+        /// <summary>
+        /// Get Records with UserID = 10 order by rating
+        /// </summary>
+        public void GetRecordsWithUserId10()
+        {
+            dataTable.Rows.Add(7, 10, 2, "Bad", false);
+            dataTable.Rows.Add(9, 10, 5, "Good", true);
+            dataTable.Rows.Add(12, 10, 3, "Nice", true);
+            dataTable.Rows.Add(7, 10, 5, "Good", true);
+
+            var recordedData = from productReview in dataTable.AsEnumerable()
+                               where productReview.Field<int>("UserId") == 10
+                               orderby productReview.Field<double>("Rating")
+                               select productReview;
+
+            foreach (var product in recordedData)
+            {
+                Console.WriteLine("ProductID : " + product.Field<int>("ProductID") + " " + "UserID : " + product.Field<int>("UserID")
+                    + " " + "Rating : " + product.Field<double>("Rating") + " " + "Review : " + product.Field<string>("Review") + " "
+                    + "isLike : " + product.Field<bool>("isLike"));
+            }
+
+        }
     }
 }
