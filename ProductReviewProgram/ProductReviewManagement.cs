@@ -49,7 +49,7 @@ namespace ProductReviewProgram
         /// <param name="listProductReview"></param>
         public void GetCountOfReviews(List<ProductReview> listProductReview)
         {
-            var recordedData = listProductReview.GroupBy(x => x.ProductID).Select(x => new { ProductID = x.Key, Count = x.Count() });
+            var recordedData = listProductReview.GroupBy(x => x.ProductID).Select(x => new { ProductID = x.Key, Count = x.Count()});
             foreach (var list in recordedData)
             {
                 Console.WriteLine(list.ProductID + "-->" + list.Count);
@@ -116,6 +116,17 @@ namespace ProductReviewProgram
                 Console.WriteLine("ProductID : " + product.Field<int>("ProductID") + " " + "UserID : " + product.Field<int>("UserID")
                     + " " + "Rating : " + product.Field<double>("Rating") + " " + "Review : " + product.Field<string>("Review") + " " 
                     + "isLike : " + product.Field<bool>("isLike"));
+            }
+        }
+
+        public void GetAverageRating()
+        {
+            var recordedData = dataTable.AsEnumerable().GroupBy(e => e.Field<int>("ProductID")).Select 
+                               (x => new { ProductID = x.Key, Average = x.Average(y => y.Field<double>("Rating"))});
+
+            foreach (var list in recordedData)
+            {
+                Console.WriteLine(list.ProductID + "-->" + list.Average);
             }
         }
     }
